@@ -10,13 +10,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "qoem-vagrant.box"
+  config.vm.box = "afarshad/qoem-mininet"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
-   config.vm.box ="qoem/qoem-vagrant.box"
-   config.vm.box_check_update = true
+  # config.vm.box_check_update = false
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
@@ -34,14 +33,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # If true, then any SSH connections made will enable agent forwarding.
   # Default value: false
-  config.ssh.forward_agent = true
-  config.ssh.forward_x11 = true
-  #config.vm.provision "shell", path: "setup.sh"
+  # config.ssh.forward_agent = true
+
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
-  config.vm.synced_folder "~/", "/host_home", :mount_options => ["dmode=777","fmode=666"]
+  # config.vm.synced_folder "../data", "/vagrant_data"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -121,4 +119,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # chef-validator, unless you changed the configuration.
   #
   #   chef.validation_client_name = "ORGNAME-validator"
+  config.ssh.forward_agent = true
+  config.ssh.forward_x11 = true
+  config.vm.provision "shell", path: "setup.sh"
+
 end
